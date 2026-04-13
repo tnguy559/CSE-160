@@ -89,6 +89,13 @@ function addActionsForHtmlUI() {
   document.getElementById('triButton').onclick = function() { g_selectedType=TRIANGLE; };
   document.getElementById('cirButton').onclick = function() { g_selectedType=CIRCLE; };
 
+  document.getElementById('drawPicture').onclick = function() { drawMyPicture(); };
+
+  document.getElementById('undoButton').onclick = function() {
+    g_shapesList.pop();
+    renderAllShapes();
+  };
+
   // Slider Events
   document.getElementById('redSlide').addEventListener('mouseup',   function() { g_selectedColor[0] = this.value/100; });
   document.getElementById('greenSlide').addEventListener('mouseup', function() { g_selectedColor[1] = this.value/100; });
@@ -195,4 +202,60 @@ function sendTextToHTML(text, htmlID) {
     return;
   }
   htmlElm.innerHTML = text;
+}
+
+function drawMyPicture() {
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  
+  // --- LIGHT GRAY: body parts ---
+  gl.uniform4f(u_FragColor, 0.75, 0.75, 0.75, 1.0);
+  
+  // HEAD
+  drawTriangle([-0.6,  0.20,   0.0,  0.20,  -0.6,  0.72]);
+  drawTriangle([ 0.0,  0.20,   0.0,  0.72,  -0.6,  0.72]);
+  
+  // LEFT EAR
+  drawTriangle([-0.55, 0.72,  -0.38, 0.72,  -0.47, 0.95]);
+  
+  // RIGHT EAR
+  drawTriangle([-0.22, 0.72,  -0.05, 0.72,  -0.13, 0.95]);
+  
+  // UPPER BODY
+  drawTriangle([-0.6, -0.10,   0.35, -0.10,  -0.6,  0.20]);
+  drawTriangle([ 0.35, -0.10,  0.35,  0.20,  -0.6,  0.20]);
+  
+  // LEFT FRONT LEG
+  drawTriangle([-0.55, -0.50,  -0.28, -0.50,  -0.55, -0.10]);
+  drawTriangle([-0.28, -0.50,  -0.28, -0.10,  -0.55, -0.10]);
+  
+  // RIGHT FRONT LEG
+  drawTriangle([-0.15, -0.50,   0.12, -0.50,  -0.15, -0.10]);
+  drawTriangle([ 0.12, -0.50,   0.12, -0.10,  -0.15, -0.10]);
+  
+  // BACK
+  drawTriangle([ 0.35, -0.10,   0.60, -0.10,   0.35,  0.20]);
+  drawTriangle([ 0.60, -0.10,   0.60, -0.40,   0.35, -0.10]);
+  
+  // TAIL
+  drawTriangle([ 0.35,  0.10,   0.60,  0.30,   0.60,  0.10]);
+  drawTriangle([ 0.60,  0.10,   0.80,  0.00,   0.60, -0.10]);
+  drawTriangle([ 0.60,  0.30,   0.80,  0.10,   0.80,  0.30]);
+  
+  // BLACK
+  gl.uniform4f(u_FragColor, 0.1, 0.1, 0.1, 1.0);
+  
+  // LEFT EYE
+  drawTriangle([-0.52, 0.58,  -0.33, 0.58,  -0.42, 0.40]);
+  
+  // RIGHT EYE
+  drawTriangle([-0.27, 0.58,  -0.08, 0.58,  -0.17, 0.40]);
+  
+  // MOUTH
+  drawTriangle([-0.42, 0.38,  -0.18, 0.38,  -0.30, 0.25]);
+  
+  // LEFT PAW
+  drawTriangle([-0.55, -0.50,  -0.28, -0.50,  -0.42, -0.65]);
+  
+  // RIGHT PAW
+  drawTriangle([-0.15, -0.50,   0.12, -0.50,  -0.02, -0.65]);
 }

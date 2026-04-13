@@ -6,6 +6,8 @@
   </head>
 
   <body onload="main()">
+    <p><b>Awesomeness:</b> Press Undo to remove the last drawn shape</p>
+      
     <canvas id="webgl" width="400" height="400">
     Please use a browser that supports "canvas"
     </canvas>
@@ -22,7 +24,11 @@
     <button type="button" id="pointButton">Point</button>
     <button type="button" id="triButton">Triangle</button>
     <button type="button" id="cirButton">Circle</button>
-      
+
+    <p>
+    <button type="button" id="drawPicture">Draw Picture</button>
+    <p>
+    <button type="button" id="undoButton">Undo</button>
     <p>
     Red <input type="range" min="0" max="100" value="100" class="slider" id="redSlide">
     <p>
@@ -34,6 +40,9 @@
     Size <input type="range" min="5" max="50" value="0" class="slider" id="sizeSlide">  
     <p>
     Circle Segments <input type="range" min="3" max="100" value="10" class="slider" id="segSlide">
+    <p>
+
+    <img src="cat.jpg" width="400" alt="My cat drawing on graph paper">
       
     <script src="../lib/webgl-utils.js"></script>
     <script src="../lib/webgl-debug.js"></script>
